@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
+	_ "loveHome/models"
 	_ "loveHome/routers"
 	"net/http"
 	"strings"
@@ -11,6 +12,17 @@ import (
 func main() {
 
 	ignoreStaticPath()
+
+	//开启session功能
+	beego.BConfig.WebConfig.Session.SessionOn = true
+
+	beego.SetStaticPath("/group1/M00", "data")
+
+	/*	//测试fdfs接口
+		_, _, err := models.FDFSUploadByFilename("./123.jpg")
+		if err == nil {
+		}
+	*/
 	beego.Run()
 }
 
